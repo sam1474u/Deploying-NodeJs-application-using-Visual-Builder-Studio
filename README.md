@@ -80,4 +80,53 @@ What Do You Need?
 
 ![image](https://user-images.githubusercontent.com/42166489/107633484-1ea1ad00-6c8e-11eb-9810-0a56bb7ad659.png)
   
-  
+ ![image](https://user-images.githubusercontent.com/42166489/107633616-54df2c80-6c8e-11eb-8a32-f4f9fa4f272a.png)
+
+![image](https://user-images.githubusercontent.com/42166489/107633631-5ad50d80-6c8e-11eb-8196-ed831fa497ec.png)
+
+
+8. Update the VM Template to add Kubernetes
+9. Add the Kubernetes File to the Git Repository
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name:  nodejsmicroappocir-k8s-deployment
+spec:
+  selector:
+    matchLabels:
+      app:  nodejsmicro
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: nodejsmicro
+    spec:
+      containers:
+      - name: nodejsmicro
+        image: bom.ocir.io/bmdrgwy1wsjh/viveklal/my_nodejs_image:latest
+        ports:
+        - containerPort: 80
+      imagePullSecrets:
+      - name: ocirsecret
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name:  nodejsmicroappocir-k8s-service
+spec:
+  type: LoadBalancer
+  ports:
+  - port: 80
+    protocol: TCP
+  selector:
+    app: nodejsmicro
+
+
+10. Configure a Build Job 
+   Enter the name and from Add step, select OCIcli
+   Enter required details which you noted in notepad earlier
+   
+   
+   
+   
