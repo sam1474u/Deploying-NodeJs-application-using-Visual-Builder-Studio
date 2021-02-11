@@ -88,39 +88,39 @@ What Do You Need?
 8. Update the VM Template to add Kubernetes
 9. Add the Kubernetes File to the Git Repository
 
-apiVersion: apps/v1
-kind: Deployment
-metadata:
-  name:  nodejsmicroappocir-k8s-deployment
-spec:
-  selector:
-    matchLabels:
-      app:  nodejsmicro
-  replicas: 1
-  template:
-    metadata:
-      labels:
-        app: nodejsmicro
-    spec:
-      containers:
-      - name: nodejsmicro
-        image: bom.ocir.io/bmdrgwy1wsjh/viveklal/my_nodejs_image:latest
-        ports:
-        - containerPort: 80
-      imagePullSecrets:
-      - name: ocirsecret
----
-apiVersion: v1
-kind: Service
-metadata:
-  name:  nodejsmicroappocir-k8s-service
-spec:
-  type: LoadBalancer
-  ports:
-  - port: 80
-    protocol: TCP
-  selector:
-    app: nodejsmicro
+                  apiVersion: apps/v1
+                  kind: Deployment
+                  metadata:
+                    name:  nodejsmicroappocir-k8s-deployment
+                  spec:
+                    selector:
+                      matchLabels:
+                        app:  nodejsmicro
+                    replicas: 1
+                    template:
+                      metadata:
+                        labels:
+                          app: nodejsmicro
+                      spec:
+                        containers:
+                        - name: nodejsmicro
+                          image: bom.ocir.io/bmdrgwy1wsjh/viveklal/my_nodejs_image:latest
+                          ports:
+                          - containerPort: 80
+                        imagePullSecrets:
+                        - name: ocirsecret
+                  ---
+                  apiVersion: v1
+                  kind: Service
+                  metadata:
+                    name:  nodejsmicroappocir-k8s-service
+                  spec:
+                    type: LoadBalancer
+                    ports:
+                    - port: 80
+                      protocol: TCP
+                    selector:
+                      app: nodejsmicro
 
 
 10. Configure a Build Job 
@@ -151,10 +151,26 @@ cbNF375h59hjgfdDGN4n5ji9J85VH75544FGHHJk9HJK98seFe45Da==
          
 11. Run the Node.js App 
 
+![image](https://user-images.githubusercontent.com/42166489/107637235-cff71180-6c93-11eb-8730-b76b77d7e611.png)
 
 12. Delete the Kubernetes Objects from OKE 
 
 ![image](https://user-images.githubusercontent.com/42166489/107638506-af2fbb80-6c95-11eb-9ca5-eae18381a104.png)
 
-
+13. Create a Pipeline File using YAML
+   
+    - Create a file .ci-build/pipeline.yml. in Git repository. and enter this script and commit.
+    
+               pipeline:
+           name: build-deploy-pipeline-yaml
+           auto-start: false
+           start:
+           - build-nodejs-docker
+           - undeploy-nodejs-kubernetes
+           - on succeed, fail:
+             - deploy-nodejs-kubernetes
+    
+  - Run the Pipeline 
+  
+  
      
