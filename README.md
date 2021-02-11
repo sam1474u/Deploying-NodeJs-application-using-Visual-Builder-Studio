@@ -150,6 +150,11 @@ cbNF375h59hjgfdDGN4n5ji9J85VH75544FGHHJk9HJK98seFe45Da==
          
          
 11. Run the Node.js App 
+
+
 12. Delete the Kubernetes Objects from OKE 
+
+![image](https://user-images.githubusercontent.com/42166489/107638506-af2fbb80-6c95-11eb-9ca5-eae18381a104.png)
+
 
      
