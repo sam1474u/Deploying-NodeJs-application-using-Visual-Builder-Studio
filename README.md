@@ -182,6 +182,11 @@ cbNF375h59hjgfdDGN4n5ji9J85VH75544FGHHJk9HJK98seFe45Da==
    In this case the Kubernets app was undeployed in eaerlier stage so it is in red. 
    
    
+   ![image](https://user-images.githubusercontent.com/42166489/107640263-05056300-6c98-11eb-819a-b92a0d092101.png)
+   
+   
+   
+   
 
 
 
