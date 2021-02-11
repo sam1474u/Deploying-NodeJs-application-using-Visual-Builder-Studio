@@ -73,4 +73,11 @@ What Do You Need?
   - Wait for the image to download. 
   - Run this command to publish the image to a local container: 
   
+    
+![image](https://user-images.githubusercontent.com/42166489/107633454-0e89cd80-6c8e-11eb-961a-ce46d7f3bcb7.png)
+
+![image](https://user-images.githubusercontent.com/42166489/107633477-18133580-6c8e-11eb-8656-2c63c6041e33.png)
+
+![image](https://user-images.githubusercontent.com/42166489/107633484-1ea1ad00-6c8e-11eb-9810-0a56bb7ad659.png)
+  
   
