@@ -47,4 +47,14 @@ What Do You Need?
                     EXPOSE 80
                     CMD [ "npm", "start" ]
                     
-6.         
+![image](https://user-images.githubusercontent.com/42166489/107632222-39732200-6c8c-11eb-84d6-2f42b14d1bf3.png)
+
+
+6. Configure a Build Job 
+
+   - Provide name and description
+   - Select Git repo 
+   - Add Step. Docker login, Docker build , Docker Push
+   
+   
+   
