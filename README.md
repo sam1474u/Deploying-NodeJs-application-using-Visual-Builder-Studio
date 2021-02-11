@@ -170,7 +170,20 @@ cbNF375h59hjgfdDGN4n5ji9J85VH75544FGHHJk9HJK98seFe45Da==
            - on succeed, fail:
              - deploy-nodejs-kubernetes
     
-  - Run the Pipeline 
+  - Run the Pipeline
   
+      This is how the pipeline looks like.  
+  
+![image](https://user-images.githubusercontent.com/42166489/107639809-67119880-6c97-11eb-8dc8-21cc2b627988.png)
+
+      
+   On the pipeline's instances page, monitor its builds.
+   If the service and deployment objects exist on OKE, builds of all jobs are successful and all boxes shows green. If any of deployment objects are missing, it will show red boxes.
+   In this case the Kubernets app was undeployed in eaerlier stage so it is in red. 
+   
+   
+
+
+
   
      
