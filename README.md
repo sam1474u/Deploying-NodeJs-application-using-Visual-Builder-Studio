@@ -170,7 +170,7 @@ cbNF375h59hjgfdDGN4n5ji9J85VH75544FGHHJk9HJK98seFe45Da==
            - on succeed, fail:
              - deploy-nodejs-kubernetes
     
-  - Run the Pipeline
+14. Run the Pipeline
   
       This is how the pipeline looks like.  
   
@@ -185,10 +185,109 @@ cbNF375h59hjgfdDGN4n5ji9J85VH75544FGHHJk9HJK98seFe45Da==
    ![image](https://user-images.githubusercontent.com/42166489/107640263-05056300-6c98-11eb-819a-b92a0d092101.png)
    
    
+   ![image](https://user-images.githubusercontent.com/42166489/107641380-8d383800-6c99-11eb-8e56-353300766cd4.png)
    
    
+ 15. Upload the Node.js Unit Test Script to the Git Repository
+ 
+                        var rest_supertest = require("supertest");
+            var should = require("should");
 
+            // Enter your REST microservice app's URL here
+            var rest_server = rest_supertest.agent(process.env.VAR_MICRO_URL);  //URL with build parameter input
 
+            describe("Unit Tests for the REST Service",function(){
+
+                // #1 Test if the REST URL is up
+                it("should find the service to be running",function(done){
+                    rest_server
+                    .get("/")
+                    .expect("Content-type",/json/)
+                    .expect(200) // HTTP response
+                    .end(function(err,res){
+                        res.status.should.equal(200);
+                        res.body.error.should.equal(false);
+                        done();
+                    });
+                });
+
+                // #2 Test the main.js /add method
+                it("should add two numbers",function(done){
+                    rest_server
+                    .post('/add')
+                    .send({num1 : 10, num2 : 20})
+                    .expect("Content-type",/json/)
+                    .expect(200)
+                    .end(function(err,res){
+                        res.status.should.equal(200);
+                        res.body.error.should.equal(false);
+                        res.body.data.should.equal(30);
+                        done();
+                    });
+                });
+
+                // #3 Test a non-existent method
+                it("should return 404",function(done){
+                rest_server
+                .get("/subtract")
+                .expect(404)
+                .end(function(err,res){
+                    res.status.should.equal(404);
+                    done();
+                    });
+                });
+            });
+   
+      Next to Root Root of the repository, click / and select package.json. In the package json file add below script and then commit
+      
+                     {
+              "name": "NodeJSMicro",
+              "version": "0.0.1",
+              "scripts": {
+                "start": "node main.js",
+                "test": "mocha test.js"
+              },
+              "dependencies": {
+                "body-parser": "^1.19.0",
+                "express": "^4.17.1"
+              },
+              "devDependencies": {
+                "mocha": "^7.0.1",
+                "should": "^13.2.3",
+                "supertest": "^4.0.2"
+              }
+            }
+            
+            
+ 16. Configure a Build Job 
+   
+   Create a Job and in the parameter, add string. Select Unix shell form the Common Build tools.
+   
+         npm install --save-dev mocha
+         npm install --save-dev should
+         npm install --save-dev supertest
+         npm test
+         
+ 17. Run the build Job.
+     In case a success :
+     
+            [2020-02-11 01:00:00] > mocha test.js
+            [2020-02-11 01:00:00]   Unit Tests for the REST Service
+            [2020-02-11 01:00:00]     ✓ should find the service to be running
+            [2020-02-11 01:00:00]     ✓ should add two numbers
+            [2020-02-11 01:00:00]     ✓ should return 404
+            [2020-02-11 01:00:00]   3 passing (39ms)
+            [2020-02-11 01:00:00] END shell script execution
+
+      In case a failure :
+      
+         [2021-02-11 13:26:39] > mocha test.js
+         [2021-02-11 13:26:40]   Unit Tests for the REST Service
+         [2021-02-11 13:26:42]     1) should find the service to be running
+         [2021-02-11 13:26:44]     2) should add two numbers
+         [2021-02-11 13:26:46]     3) should return 404
+         [2021-02-11 13:26:46]   0 passing (6s)
 
   
-     
+Hence, from this tutorial, you can learn creating a docker image and deploying to Kubernetes cluster using Oracle Visual Studio(VBS).Deployment process can be automated using pipeline.
+Finally application can be tested also on Visual builder studio(VBS)
