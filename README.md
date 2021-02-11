@@ -125,8 +125,31 @@ spec:
 
 10. Configure a Build Job 
    Enter the name and from Add step, select OCIcli
-   Enter required details which you noted in notepad earlier
+   Enter required details which you noted in notepad earlier. Please note the private key saves as * for security.
+   
+   -----BEGIN RSA PRIVATE KEY-----
+MIIABCD123efgh456XYz321UAT654ORA1290A2b3C4d5hym28a8b1c0AyugOFsdg
+cbNF375h59hjgfdDGN4n5ji9J85VH75544FGHHJk9HJK98seFe45Da==
+-----END RSA PRIVATE KEY-----
    
    
+![image](https://user-images.githubusercontent.com/42166489/107634542-b358da80-6c8f-11eb-88db-8ae534747a52.png)
    
    
+   In the Steps tab, from Add Step, select Common Build Tools, and then select Unix Shell.
+   Copy this shell script and paste it in Script. 
+     
+          mkdir -p $HOME/.kube
+         oci ce cluster create-kubeconfig --cluster-id ocid1.cluster.oc1.iad.abcdefghiaaaaaaabbbbbbb09876m8n9o0abcd1234901ghi0n6o7pababcd --file $HOME/.kube/config --region us-ashburn-1
+         export KUBECONFIG=$HOME/.kube/config
+         kubectl create secret docker-registry ocirsecret --docker-server=iad.ocir.io --docker-username='myaccount/ociuser' --docker-password='a<{:1{(B[Zb>2;cD321z' --docker-         email='ociuser@example.com'
+         kubectl create -f nodejs_micro.yml
+         sleep 30
+         kubectl get services nodejsmicroappocir-k8s-service
+         kubectl describe pods
+         
+         
+11. Run the Node.js App 
+12. Delete the Kubernetes Objects from OKE 
+
+     
