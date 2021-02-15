@@ -51,7 +51,7 @@ What Do You Need?
                     EXPOSE 80
                     CMD [ "npm", "start" ]
                     
-![image](https://user-images.githubusercontent.com/42166489/107632222-39732200-6c8c-11eb-84d6-2f42b14d1bf3.png)
+   ![image](https://user-images.githubusercontent.com/42166489/107632222-39732200-6c8c-11eb-84d6-2f42b14d1bf3.png)
 
 
 6. Configure a Build Job 
@@ -60,13 +60,13 @@ What Do You Need?
    - Select Git repo 
    - Add Step. Docker login, Docker build , Docker Push
    
-![image](https://user-images.githubusercontent.com/42166489/107632920-32004880-6c8d-11eb-8289-00844d292570.png)
+    ![image](https://user-images.githubusercontent.com/42166489/107632920-32004880-6c8d-11eb-8289-00844d292570.png)
 
 7. Run the Node.js App
 
-   - On your computer, open the Docker terminal.Run this command to log into OCIR: 
+  - On your computer, open the Docker terminal.Run this command to log into OCIR: 
             docker login iad.ocir.io
-  -  When prompted, enter the user name and the auth token as the password. The password isn't visible when you type it. Press Enter when you're done.
+  - When prompted, enter the user name and the auth token as the password. The password isn't visible when you type it. Press Enter when you're done.
   - Run this command to pull the Docker image you pushed to OCIR from the build job: 
             docker pull iad.ocir.io/myaccount/ociuser/my_nodejs_image
             
